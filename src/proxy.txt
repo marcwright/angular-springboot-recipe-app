@@ -1,0 +1,7 @@
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "recipe-frontend:build",
+            "proxyConfig": "src/proxy.conf.json"
+          },
+https://angular.io/guide/build#proxying-to-a-backend-server

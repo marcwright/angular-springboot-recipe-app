@@ -1,3 +1,6 @@
+```curl -X POST https://floating-beyond-06948.herokuapp.com/auth/users/register --header "Content-Type: application/json" -d '{"userName":"test","emailAddress":"test@test.com","password":"test123"}'```
+
+
 # RecipeFrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.6.
@@ -5,6 +8,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+
+
 
 ## Code scaffolding
 

@@ -1,0 +1,17 @@
+<section>
+  <h2>Register a User</h2>
+  <input [(ngModel)]="userName" type="text" placeholder="User Name"/>
+  <input [(ngModel)]="emailAddress" type="text" placeholder="Email Address"/>
+  <input [(ngModel)]="password" type="text" placeholder="Password"/>
+  <input (click)="handleCreateUserSubmit()" type="submit" value="Create User"/>
+</section>
+username: {{userName}}<br/>
+email: {{emailAddress}}<br/>
+password: {{password}}<br/>
+<section>
+  <h2>Add a category</h2>
+  Search String: {{zip}}
+  <input [(ngModel)]="zip" type="text" placeholder="Zip Code Here"/>
+  <input [(ngModel)]="zip" type="text" placeholder="Zip Code Here"/>
+  <input type="submit" value="Search"/>
+</section>

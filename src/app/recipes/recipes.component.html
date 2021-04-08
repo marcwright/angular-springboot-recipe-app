@@ -3,11 +3,23 @@
   <input [(ngModel)]="userName" type="text" placeholder="User Name"/>
   <input [(ngModel)]="emailAddress" type="text" placeholder="Email Address"/>
   <input [(ngModel)]="password" type="text" placeholder="Password"/>
-  <input (click)="handleCreateUserSubmit()" type="submit" value="Create User"/>
+  <input (click)="handleUserRegister()" type="submit" value="Register"/>
 </section>
 username: {{userName}}<br/>
 email: {{emailAddress}}<br/>
 password: {{password}}<br/>
+
+<section>
+<h2>Login a User</h2>
+<input [(ngModel)]="emailAddress" type="text" placeholder="Email Address"/>
+<input [(ngModel)]="password" type="text" placeholder="Password"/>
+<input (click)="handleUserLogin()" type="submit" value="Login User"/>
+</section>
+
+<div *ngIf="this.token">
+  CURRENT USER: {{this.emailAddress}}
+</div>
+
 <section>
   <h2>Add a category</h2>
   Search String: {{zip}}

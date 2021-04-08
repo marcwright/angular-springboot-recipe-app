@@ -12,43 +12,28 @@ export class RecipesComponent implements OnInit {
   emailAddress: string;
   password: string;
   zip: string;
+  token: string;
+  currentUser: {};
 
-  handleCreateUserSubmit(): void {
-
-    const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjLndyaWdodEBnbWFpbC5jb20iLCJleHAiOjE2MTc5Mzg4NzIsImlhdCI6MTYxNzkwMjg3Mn0.zr-9mSxZPNwuksYnwiMVjoCAasbmLxd_gB1PehnXxkY";
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type':  'application/json',
-    //     'Access-Control-Allow-Origin': '*',
-    //     'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-    //     'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With'
-    //     // Authorization: 'my-auth-token'
-    //   })
-    // };
-
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type':  'application/json',
-    //     'Access-Control-Allow-Origin': '*',
-    //     'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',
-    //     'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With',
-    //     Authorization: token
-    //   })
-    // };
-
+  handleUserRegister(): void {
     const newUser = {userName: this.userName, emailAddress: this.emailAddress, password: this.password};
     console.log(newUser);
     this.http
       .post(`https://fathomless-falls-90499.herokuapp.com/auth/users/register`, newUser)
       .toPromise()
-      .then(response => console.log(JSON.stringify(response)));
+      .then(response => console.log(response));
+  }
 
-    // const newUser = {userName: this.userName, emailAddress: this.emailAddress, password: this.password};
-    // console.log(newUser);
-    // this.http
-    //   .get(`https://floating-beyond-06948.herokuapp.com/api/categories`, httpOptions)
-    //   .toPromise()
-    //   .then(response => console.log(JSON.stringify(response)));
+  handleUserLogin(): void {
+    const user = {email: this.emailAddress, password: this.password};
+    console.log(user);
+    this.http
+      .post(`https://fathomless-falls-90499.herokuapp.com/auth/users/login`, user)
+      .toPromise()
+      .then(response => {
+        this.token = response['jwt'];
+        console.log(response, this.token);
+      });
   }
 
 

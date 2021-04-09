@@ -81,10 +81,13 @@ export class RecipesComponent implements OnInit {
       // NON CORS BACKEND
       .post(`${herokuUrl}/api/categories/`, category, requestOptions)
       .toPromise()
-      .then(response => { console.log(response); });
+      .then(response => {
+        console.log(response);
+        this.categories = [...this.categories, response];
+      });
   }
 
-  deleteCategory(categoryId): void {
+  deleteCategory(category): void {
     const headerDict = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
@@ -97,11 +100,13 @@ export class RecipesComponent implements OnInit {
 
     this.http
       // NON CORS BACKEND
-      .delete(`${herokuUrl}/api/categories/${categoryId}`,  requestOptions)
+      .delete(`${herokuUrl}/api/categories/${category.id}`,  requestOptions)
       .toPromise()
       .then(response => {
         console.log(response);
-
+        const categoriesCopy = [...this.categories];
+        categoriesCopy.splice(this.categories.indexOf(category), 1);
+        this.categories = [...categoriesCopy];
       });
   }
 

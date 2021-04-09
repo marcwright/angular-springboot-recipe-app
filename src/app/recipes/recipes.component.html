@@ -23,7 +23,7 @@
 <ul>
   <li *ngFor="let category of categories">
     {{category.name}} -- {{category.description}}
-    <button (click)="deleteCategory(category.id)">delete</button>
+    <button (click)="deleteCategory(category)">delete</button>
   </li>
 </ul>
 

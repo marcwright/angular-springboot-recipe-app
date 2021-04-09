@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 
+const herokuUrl = 'https://fathomless-falls-90499.herokuapp.com'; // WITH CORS
+// const herokuUrl = "https://floating-beyond-06948.herokuapp.com"; // NO CORS
+
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
@@ -11,7 +14,8 @@ export class RecipesComponent implements OnInit {
   userName: string;
   emailAddress: string;
   password: string;
-  zip: string;
+  name: string;
+  description: string;
   token: string;
   currentUser: {};
 
@@ -19,7 +23,7 @@ export class RecipesComponent implements OnInit {
     const newUser = {userName: this.userName, emailAddress: this.emailAddress, password: this.password};
     console.log(newUser);
     this.http
-      .post(`https://fathomless-falls-90499.herokuapp.com/auth/users/register`, newUser)
+      .post(`${herokuUrl}/auth/users/register`, newUser)
       .toPromise()
       .then(response => console.log(response));
   }
@@ -29,7 +33,7 @@ export class RecipesComponent implements OnInit {
     console.log(user);
     this.http
       // BACKEND WITH CORS
-      .post(`https://fathomless-falls-90499.herokuapp.com/auth/users/login`, user)
+      .post(`${herokuUrl}/auth/users/login`, user)
       .toPromise()
       .then(response => {
         this.token = response['jwt'];
@@ -42,7 +46,7 @@ export class RecipesComponent implements OnInit {
       'Content-Type': 'application/json',
       Accept: 'application/json',
       'Access-Control-Allow-Headers': 'Content-Type',
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYXJjLndyaWdodEBnbWFpbC5jb20iLCJleHAiOjE2MTc5NTUyNTEsImlhdCI6MTYxNzkxOTI1MX0.HrbJz7pcpHf_XkGObkr24baVVuV2NYinhjjlAawvlCc`
+      Authorization: `Bearer ${this.token}`
     };
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
@@ -53,7 +57,7 @@ export class RecipesComponent implements OnInit {
     console.log(headerDict, requestOptions);
     this.http
       // NON CORS BACKEND
-      .get(`https://floating-beyond-06948.herokuapp.com/api/categories`, requestOptions)
+      .get(`${herokuUrl}/api/categories`, requestOptions)
       .toPromise()
       .then(response => {
 

@@ -38,7 +38,11 @@ export class RecipesComponent implements OnInit {
       .toPromise()
       .then(response => {
         this.token = response['jwt'];
+        localStorage.setItem("token", `${this.token}`);
         console.log(response, this.token);
+      })
+      .then(() => {
+        this.getCategories();
       });
   }
 
@@ -78,7 +82,6 @@ export class RecipesComponent implements OnInit {
 
     console.log(headerDict, requestOptions, category);
     this.http
-      // NON CORS BACKEND
       .post(`${herokuUrl}/api/categories/`, category, requestOptions)
       .toPromise()
       .then(response => {
@@ -99,7 +102,6 @@ export class RecipesComponent implements OnInit {
     };
 
     this.http
-      // NON CORS BACKEND
       .delete(`${herokuUrl}/api/categories/${category.id}`,  requestOptions)
       .toPromise()
       .then(response => {
@@ -113,6 +115,8 @@ export class RecipesComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    const localToken = localStorage.getItem("token");
+    if (localToken) { this.token = localToken; }
   }
 
 }

@@ -112,6 +112,12 @@ export class RecipesComponent implements OnInit {
       });
   }
 
+  logout(): void {
+    this.token = '';
+    localStorage.removeItem("token");
+    console.log(localStorage);
+  }
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {

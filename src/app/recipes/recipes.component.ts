@@ -18,6 +18,7 @@ export class RecipesComponent implements OnInit {
   description: string;
   token: string;
   currentUser: {};
+  categories: any;
 
   handleUserRegister(): void {
     const newUser = {userName: this.userName, emailAddress: this.emailAddress, password: this.password};
@@ -58,7 +59,7 @@ export class RecipesComponent implements OnInit {
       .get(`${herokuUrl}/api/categories`, requestOptions)
       .toPromise()
       .then(response => {
-
+        this.categories = response;
         console.log(response);
       });
   }
@@ -81,6 +82,27 @@ export class RecipesComponent implements OnInit {
       .post(`${herokuUrl}/api/categories/`, category, requestOptions)
       .toPromise()
       .then(response => { console.log(response); });
+  }
+
+  deleteCategory(categoryId): void {
+    const headerDict = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      Authorization: `Bearer ${this.token}`
+    };
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+
+    this.http
+      // NON CORS BACKEND
+      .delete(`${herokuUrl}/api/categories/${categoryId}`,  requestOptions)
+      .toPromise()
+      .then(response => {
+        console.log(response);
+
+      });
   }
 
   constructor(private http: HttpClient) { }

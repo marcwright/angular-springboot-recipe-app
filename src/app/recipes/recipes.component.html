@@ -19,6 +19,14 @@
 </div>
 
 <button (click)="getCategories()">get All Categories</button>
+
+<ul>
+  <li *ngFor="let category of categories">
+    {{category.name}} -- {{category.description}}
+    <button (click)="deleteCategory(category.id)">delete</button>
+  </li>
+</ul>
+
 <section>
   <h2>Add a category</h2>
   <input [(ngModel)]="name" type="text" placeholder="name"/>

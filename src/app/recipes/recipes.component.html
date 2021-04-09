@@ -23,5 +23,5 @@
   <h2>Add a category</h2>
   <input [(ngModel)]="name" type="text" placeholder="name"/>
   <input [(ngModel)]="description" type="text" placeholder="description"/>
-  <input type="submit" value="Create Category"/>
+  <input (click)="createCategory()" type="submit" value="Create Category"/>
 </section>

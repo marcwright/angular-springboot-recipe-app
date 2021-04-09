@@ -51,9 +51,7 @@ export class RecipesComponent implements OnInit {
     const requestOptions = {
       headers: new HttpHeaders(headerDict),
     };
-    // const headersObject = new HttpHeaders()
-    //   .set('content-type', 'application/json')
-    //   .set('Authorization', `Bearer ${this.token}`);
+
     console.log(headerDict, requestOptions);
     this.http
       // NON CORS BACKEND
@@ -65,6 +63,25 @@ export class RecipesComponent implements OnInit {
       });
   }
 
+  createCategory(): void {
+    const headerDict = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      Authorization: `Bearer ${this.token}`
+    };
+    const requestOptions = {
+      headers: new HttpHeaders(headerDict),
+    };
+    const category = {name: this.name, description: this.description};
+
+    console.log(headerDict, requestOptions, category);
+    this.http
+      // NON CORS BACKEND
+      .post(`${herokuUrl}/api/categories/`, category, requestOptions)
+      .toPromise()
+      .then(response => { console.log(response); });
+  }
 
   constructor(private http: HttpClient) { }
 

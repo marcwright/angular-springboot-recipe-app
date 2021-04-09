@@ -38,6 +38,7 @@ export class RecipesComponent implements OnInit {
       .toPromise()
       .then(response => {
         this.token = response['jwt'];
+        localStorage.setItem("currentUser", `${this.emailAddress}`);
         localStorage.setItem("token", `${this.token}`);
         console.log(response, this.token);
       })
@@ -114,7 +115,9 @@ export class RecipesComponent implements OnInit {
 
   logout(): void {
     this.token = '';
+    this.categories = null;
     localStorage.removeItem("token");
+    localStorage.removeItem("currentUser");
     console.log(localStorage);
   }
 
@@ -122,7 +125,8 @@ export class RecipesComponent implements OnInit {
 
   ngOnInit(): void {
     const localToken = localStorage.getItem("token");
-    if (localToken) { this.token = localToken; }
+    const currentUser = localStorage.getItem("currentUser");
+    if (localToken) { this.token = localToken; this.emailAddress = currentUser;  }
   }
 
 }

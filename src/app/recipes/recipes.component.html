@@ -1,4 +1,6 @@
-<button (click)="logout()">Log Out</button>
+<div *ngIf="this.token">
+  CURRENT USER: {{this.emailAddress}}
+</div>
 
 <section>
   <h2>Register a User</h2>
@@ -9,25 +11,17 @@
 </section>
 
 <section>
-<h2>Login a User</h2>
-<input [(ngModel)]="emailAddress" type="text" placeholder="Email Address"/>
-<input [(ngModel)]="password" type="text" placeholder="Password"/>
-<input (click)="handleUserLogin()" type="submit" value="Login User"/>
+  <h2>Login a User</h2>
+  <input [(ngModel)]="emailAddress" type="text" placeholder="Email Address"/>
+  <input [(ngModel)]="password" type="text" placeholder="Password"/>
+  <input (click)="handleUserLogin()" type="submit" value="Login User"/>
+  <button (click)="logout()">Log Out</button>
 </section>
 
-<div *ngIf="this.token">
-  CURRENT USER: {{this.emailAddress}}
-  TOKEN: {{this.token}}
-</div>
-
-<button (click)="getCategories()">get All Categories</button>
-
-<ul>
-  <li *ngFor="let category of categories">
-    {{category.name}} -- {{category.description}}
-    <button (click)="deleteCategory(category)">delete</button>
-  </li>
-</ul>
+<section>
+  <h2>Logout a User</h2>
+  <button (click)="logout()">Log Out</button>
+</section>
 
 <section>
   <h2>Add a category</h2>
@@ -35,3 +29,21 @@
   <input [(ngModel)]="description" type="text" placeholder="description"/>
   <input (click)="createCategory()" type="submit" value="Create Category"/>
 </section>
+
+<section>
+  <h2>Get All Categories for {{this.emailAddress}}</h2>
+  <button (click)="getCategories()">Get All Categories</button>
+</section>
+
+<div *ngIf="categories">
+  <h4>All Categories</h4>
+  <ul>
+    <li *ngFor="let category of categories">
+      {{category.name}} -- {{category.description}}
+      <button (click)="deleteCategory(category)">delete</button>
+    </li>
+  </ul>
+</div>
+
+
+

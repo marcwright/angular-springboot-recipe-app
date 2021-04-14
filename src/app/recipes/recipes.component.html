@@ -41,6 +41,10 @@
     <li *ngFor="let category of categories">
       {{category.name}} -- {{category.description}}
       <button (click)="deleteCategory(category)">delete</button>
+      <form (submit)="createRecipe(category)">
+        <input [(ngModel)]="recipeName" name="recipeName" type="text" placeholder="new recipe" />
+        <input type="submit"/>
+      </form>
     </li>
   </ul>
 </div>

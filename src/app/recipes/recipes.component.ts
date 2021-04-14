@@ -21,6 +21,30 @@ export class RecipesComponent implements OnInit {
   token: string;
   currentUser: {};
   categories: any;
+  recipeName: string;
+
+  createRecipe(category): void {
+    const requestOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${this.token}`
+      }),
+    };
+    const newRecipe = {name: this.recipeName};
+    this.http
+      .post(`${herokuUrl}/api/categories/${category.id}/recipes/`, newRecipe, requestOptions)
+      .toPromise()
+      .then(response => {
+        console.log(response);
+        // const categoryIndex = this.categories.indexOf(category);
+        // const categoryToUpdate = this.categories[categoryIndex];
+        // categoryToUpdate.recipeList.push(response);
+        // console.log("cat to update", categoryToUpdate);
+        // // this.categories = [...this.categories, categoryToUpdate];
+        // this.categories[categoryIndex] = categoryToUpdate;
+
+        this.categories[this.categories.indexOf(category)].recipeList.push(response);
+      });
+  }
 
   handleUserRegister(): void {
     const newUser = {userName: this.userName, emailAddress: this.emailAddress, password: this.password};

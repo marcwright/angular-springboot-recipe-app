@@ -7,7 +7,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve --ssl --ssl-key src/localhost.key --ssl-cert src/localhost.crt",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

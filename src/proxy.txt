@@ -5,3 +5,24 @@
             "proxyConfig": "src/proxy.conf.json"
           },
 https://angular.io/guide/build#proxying-to-a-backend-server
+
+
+"scripts": {
+"start": "HTTPS=true SSL_CRT_FILE={PATH/TO/CERTIFICATE-FILENAME}.pem SSL_KEY_FILE={PATH/TO/CERTIFICATE-KEY-FILENAME}.pem react-scripts start"
+
+
+https://medium.com/@richardr39/using-angular-cli-to-serve-over-https-locally-70dab07417c8
+
+
+"scripts": {
+    "ng": "HTTPS=true SSL_CRT_FILE=src/localhost.crt SSL_KEY_FILE=src/localhost.key ng serve",
+    "start": "ng serve --ssl --ssl-key src/localhost.key --ssl-cert src/localhost.crt",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "heroku-postbuild": "ng build --prod"
+  },
+
+
+https://www.baeldung.com/spring-security-cors-preflight
